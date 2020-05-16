@@ -8,7 +8,8 @@ board = {
     "Bottom_left":" ", "Bottom_mid":" ", "Bottom_right":" "
 }
 
-board_positions = ["Top_left", "Top_mid", "Top_right",
+board_positions = [
+    "Top_left", "Top_mid", "Top_right",
     "Mid_left", "Mid_mid", "Mid_right",
     "Bottom_left", "Bottom_mid", "Bottom_right"]
 
@@ -29,26 +30,33 @@ def print_board(dict_item):    #The function will take the dictionary assigned t
 
 #write out the main function that starts the controls the game play.
 def play_game():
-    print_board(board)                                     #the board must be printed everytime we need to play
-    start_game()
+    print_board(board)          #the board must be printed everytime we need to play
+    handle_turn()
 
 #define a function to start the game
-def start_game():
-    global board
+def handle_turn():
+    global board                #call all the global variables to be used in local scope
     global player
     global board_positions
     print(player, "'s turn")
     print("Positions:", board_positions)
     print("Choose one of the above positions to play")
-    position = input()                                       #the input has to be exactly as spelt out on the board.
-    board[position] = player
+    position = input()       
+    if position not in board_positions:
+        print("Invalid input")          #the input has to be exactly as spelt out on the board.
+        handle_turn()                   #after invalid input prompt repeats
+    elif board[position] == " ":
+        board[position] = player
+    else:
+        print("That position is occupied, choose a different position.") #prevents overwriting input
+        handle_turn()                   #prompt repeats
     if player == "X":
         player = "O"
     else:
         player = "X"
-    
+        
 
-while game_on:                                               #putting the main function in a while loop
+while game_on:             #Game goes on until game_on is False.
     play_game()
 
 
