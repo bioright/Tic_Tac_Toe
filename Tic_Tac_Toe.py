@@ -5,8 +5,7 @@
 board = {
     "Top_left":" ", "Top_mid":" ", "Top_right":" ",
     "Mid_left":" ", "Mid_mid":" ", "Mid_right":" ",
-    "Bottom_left":" ", "Bottom_mid":" ", "Bottom_right":" "
-}
+    "Bottom_left":" ", "Bottom_mid":" ", "Bottom_right":" "}
 
 board_positions = [
     "Top_left", "Top_mid", "Top_right",
@@ -30,8 +29,23 @@ def print_board(dict_item):    #The function will take the dictionary assigned t
 
 #write out the main function that starts the controls the game play.
 def play_game():
-    print_board(board)          #the board must be printed everytime we need to play
-    handle_turn()
+    global game_on
+    while game_on:
+        print_board(board)          #the board must be printed everytime we need to play
+        handle_turn()
+        end_game()
+        
+
+def end_game():
+    global board
+    global game_on
+    if " " not in board.values():
+        print_board(board)
+        print("Board Full!")
+        game_on = False
+    else:
+        game_on
+    
 
 #define a function to start the game
 def handle_turn():
@@ -56,7 +70,6 @@ def handle_turn():
         player = "X"
         
 
-while game_on:             #Game goes on until game_on is False.
-    play_game()
+play_game()
 
 
