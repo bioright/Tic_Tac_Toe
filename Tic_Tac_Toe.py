@@ -18,7 +18,7 @@ player = "X"
 #start of main code
 
 #write a function to printout the board
-def print_board(dict_item):    #The function will take the dictionary assigned to board, as its argument
+def print_board():    #print the board values which are, of course, empty spaces.
     global board               #call the global variable to be used in the function
     print(board["Top_left"] + "|" + board["Top_mid"] + "|" + board["Top_right"])
     print("-+-+-")             # this will be a row seperator
@@ -31,16 +31,16 @@ def print_board(dict_item):    #The function will take the dictionary assigned t
 def play_game():
     global game_on
     while game_on:
-        print_board(board)          #the board must be printed everytime we need to play
+        print_board()          #the board must be printed everytime we need to play
         handle_turn()
         end_game()
         
-
+#function that checks if the board is full and and ends the game
 def end_game():
     global board
     global game_on
-    if " " not in board.values():
-        print_board(board)
+    if " " not in board.values(): #if no more empty space on the board, print the full board and end the game.
+        print_board()
         print("Board Full!")
         game_on = False
     else:
@@ -56,14 +56,10 @@ def handle_turn():
     print("Positions:", board_positions)
     print("Choose one of the above positions to play")
     position = input()       
-    if position not in board_positions:
-        print("Invalid input")          #the input has to be exactly as spelt out on the board.
-        handle_turn()                   #after invalid input prompt repeats
-    elif board[position] == " ":
-        board[position] = player
-    else:
-        print("That position is occupied, choose a different position.") #prevents overwriting input
-        handle_turn()                   #prompt repeats
+    while position not in board_positions or board[position] != " ":
+        print("Invalid input or position")             #input exactly as on the board and in empty position.
+        position = input() 
+    board[position] = player
     if player == "X":
         player = "O"
     else:
