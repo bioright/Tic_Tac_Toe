@@ -13,7 +13,7 @@ board_positions = [
     "Bottom_left", "Bottom_mid", "Bottom_right"]
 
 game_on = True                 #sets a boolean variable that loops the game
-player = "X"
+player = "X"                   #sets player X to start by default
 
 #start of main code
 
@@ -34,7 +34,8 @@ def play_game():
         print_board()          #the board must be printed everytime we need to play
         handle_turn()
         end_game()
-        
+
+  
 #function that checks if the board is full and and ends the game
 def end_game():
     global board
@@ -42,10 +43,20 @@ def end_game():
     if " " not in board.values(): #if no more empty space on the board, print the full board and end the game.
         print_board()
         print("Board Full!")
-        game_on = False
-    else:
-        game_on
-    
+        game_on = False 
+#writing a program to check wins and draws
+    if not game_on:
+        if board["Top_left"] == board["Top_mid"] ==board["Top_right"]:    #wins in top row
+            print(board["Top_left"], "wins")
+        elif board["Mid_left"] == board["Mid_mid"] == board["Mid_right"]:  #wins in middle row
+            print(board["Mid_left"], "wins")
+        elif board["Bottom_left"] == board["Bottom_mid"] == board["Bottom_right"]:  #wins in bottom row
+            print(board["Bottom_left"], "wins")
+        elif board["Top_left"] == board["Mid_mid"] == board["Bottom_right"]:   # wins in the diagonals
+            print(board["Top_left"], "wins")
+        else:
+            print("It is a tie")   
+        
 
 #define a function to start the game
 def handle_turn():
