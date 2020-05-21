@@ -52,10 +52,18 @@ def end_game():
             print(board["Mid_left"], "wins")
         elif board["Bottom_left"] == board["Bottom_mid"] == board["Bottom_right"]:  #wins in bottom row
             print(board["Bottom_left"], "wins")
-        elif board["Top_left"] == board["Mid_mid"] == board["Bottom_right"]:   # wins in the diagonals
+        elif board["Top_left"] == board["Mid_left"] == board["Bottom_left"]:         #wins in first column
+            print(board["Top_left"], "wins")
+        elif board["Top_mid"] == board["Mid_mid"] == board["Bottom_mid"]:             #wins in second column
+            print(board["Top_mid"], "wins")
+        elif board["Top_right"] == board["Mid_right"] == board["Bottom_right"]:        #wins in third column
+            print(board["Top_right", "wins"])
+        elif board["Top_left"] == board["Mid_mid"] == board["Bottom_right"]:           #wins in the diagonals
             print(board["Top_left"], "wins")
         else:
-            print("It is a tie")   
+            print("It is a tie") 
+
+#next step is to check for column wins  
         
 
 #define a function to start the game
